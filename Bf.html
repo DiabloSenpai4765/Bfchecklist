@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>Boyfriend Checklist — Ultra‑Cute Over‑the‑Top Edition 💘</title>
+  <style>
+    /* =============================
+       ULTRA‑CUTE THEME (iPhone‑safe)
+       ============================= */
+    :root{
+      --bg:#fff7fb; --bg2:#f9ecff; --card:#ffffff; --ink:#2f2931; --muted:#6d6172;
+      --pink:#ff79b0; --violet:#8b5cf6; --mint:#22c55e; --blue:#0ea5e9; --amber:#f59e0b; --red:#ef4444;
+      --ring:rgba(255,121,176,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+      background: var(--bg);
+      background-image:
+        radial-gradient(900px 500px at -10% -10%, #ffe8f4 20%, transparent 60%),
+        radial-gradient(900px 500px at 110% -10%, #efe6ff 20%, transparent 60%),
+        radial-gradient(1400px 800px at 50% 120%, #ffeef8 15%, transparent 60%);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }/* Top progress ribbon */
+.ribbon{position:fixed; inset:0 0 auto 0; height:6px; background:#fde7f3; z-index:70}
+.ribbon>i{display:block; height:100%; width:0%; background:linear-gradient(90deg, var(--pink), var(--violet)); transition:width .25s ease}
+
+/* Header */
+header{position:sticky; top:0; z-index:60; border-bottom:1px solid #f3d5e7;
+  background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,247,251,.92));}
+@supports ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))){
+  header{backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px)}
+}
+.container{max-width:1100px; margin:0 auto; padding:16px}
+.hero{display:flex; align-items:center; gap:16px}
+.brand{width:68px; height:68px; border-radius:20px; display:grid; place-items:center; box-shadow:0 12px 26px rgba(0,0,0,.09); transform:rotate(-6deg)}
+.brand{background:#ffd5e8}
+@supports (background: conic-gradient(#000,#111)){
+  .brand{background:conic-gradient(from 120deg, #ffd5e8, #e7dbff, #ffd5e8)}
+}
+.brand span{font-size:32px}
+h1{margin:0; font-weight:900; letter-spacing:.2px}
+.tag{color:var(--muted)}
+.badge{display:inline-flex; gap:8px; align-items:center; background:#fff; border:1px solid #f2d4e6; padding:8px 12px; border-radius:999px; font-weight:700}
+
+/* Cute legend */
+.legend{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+.pill{display:inline-flex; align-items:center; gap:6px; padding:8px 12px; border-radius:999px; background:#fff; border:1px solid #f2d4e6; font-size:14px}
+.ok{color:var(--mint)} .nr{color:var(--blue)} .bl{color:var(--amber)} .bd{color:var(--red)}
+
+/* Content */
+main{padding:22px 16px 160px}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px}
+.card{background:var(--card); border:1px solid #f3d5e7; border-radius:22px; padding:16px; box-shadow:0 8px 22px rgba(0,0,0,.06); transform:translateY(14px) scale(.98); opacity:0; transition:transform .7s cubic-bezier(.2,.8,.2,1), opacity .7s}
+.card.revealed{transform:translateY(0) scale(1); opacity:1}
+.title{font-weight:800; display:flex; gap:8px; align-items:flex-start}
+.num{font-weight:900; font-size:12px; color:#a37c8c; background:#fff3f8; border:1px solid #f2d4e6; padding:4px 7px; border-radius:999px}
+
+.options{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin-top:12px}
+.opt{position:relative; display:flex; align-items:center; gap:8px; padding:12px; border-radius:14px; border:1.5px solid #f2d4e6; background:#fff; cursor:pointer; user-select:none; transition:transform .15s ease, border-color .2s ease, box-shadow .2s ease}
+.opt:hover{transform:translateY(-1.5px)}
+.opt input{position:absolute; inset:0; opacity:0}
+.opt i{font-style:normal; font-size:18px}
+.opt.ok:hover{box-shadow:0 0 0 8px rgba(34,197,94,.10)}
+.opt.nr:hover{box-shadow:0 0 0 8px rgba(14,165,233,.10)}
+.opt.bl:hover{box-shadow:0 0 0 8px rgba(245,158,11,.12)}
+.opt.bd:hover{box-shadow:0 0 0 8px rgba(239,68,68,.12)}
+.opt.ok input:checked ~ .label{color:var(--mint); font-weight:800}
+.opt.nr input:checked ~ .label{color:var(--blue); font-weight:800}
+.opt.bl input:checked ~ .label{color:var(--amber); font-weight:800}
+.opt.bd input:checked ~ .label{color:var(--red); font-weight:800}
+
+.note{margin-top:8px; padding:10px 12px; border:1px dashed #f2d4e6; border-radius:12px; font-size:13px; color:#6e5f6a; background:#fffdfd}
+
+/* Action dock */
+.toolbar{position:fixed; inset:auto 0 0 0; background:linear-gradient(180deg, rgba(255,247,251,0), rgba(255,247,251,.96) 60%); padding:12px; z-index:65}
+.bar{max-width:1100px; margin:0 auto; background:#fff; border:1px solid #f2d4e6; border-radius:16px; padding:10px 14px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; box-shadow:0 10px 26px rgba(0,0,0,.06)}
+.btn{border:none; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; padding:10px 14px; border-radius:12px; font-weight:800; cursor:pointer; box-shadow:0 10px 22px rgba(139,92,246,.25); transition:transform .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.ghost{background:#fff; color:#5b4f54; border:1px solid #f2d4e6; box-shadow:none}
+.toggle{display:inline-flex; align-items:center; gap:8px}
+
+/* Summary panel */
+.summary{max-width:980px; margin:28px auto 0; background:#fff; border:1px solid #f2d4e6; border-radius:22px; padding:18px; display:none}
+.summary.show{display:block}
+.stat{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 4px}
+.chip{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; border:1px solid #f2d4e6; background:#fff}
+.grade{font-size:40px; font-weight:900}
+.meterWrap{display:flex; gap:16px; flex-wrap:wrap; align-items:center}
+.meter{height:14px; width:260px; background:#fde7f3; border-radius:999px; overflow:hidden}
+.meter>i{display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--pink),var(--violet))}
+
+/* Radar chart (pure SVG) */
+.chart{width:280px; height:280px; border:1px solid #f7ddef; border-radius:16px; background:#fffafb; display:grid; place-items:center}
+
+textarea{width:100%; border:1px solid #f2d4e6; border-radius:12px; padding:12px; background:#fffafb}
+
+.jump{position:fixed; right:16px; bottom:96px; width:48px; height:48px; display:grid; place-items:center; border:1px solid #f2d4e6; background:#fff; border-radius:999px; box-shadow:0 10px 22px rgba(0,0,0,.08); text-decoration:none}
+
+/* Falling hearts layer */
+.floaty{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:50}
+.heart{position:absolute; font-size:18px; opacity:.95; animation:float 8s linear forwards}
+@keyframes float{to{transform:translateY(-110vh) rotate(20deg); opacity:0}}
+
+/* Parallax candies */
+.parallax{position:fixed; inset:0; pointer-events:none; z-index:3}
+.sweet{position:absolute; opacity:.18; font-size:40px}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .card{transition:none}
+  .heart,.parallax{display:none}
+}
+
+  </style>
+</head>
+<body>
+  <div class="ribbon" aria-hidden="true"><i id="ribbonBar"></i></div>
+  <div class="parallax" aria-hidden="true" id="parallax"></div>  <header>
+    <div class="container hero">
+      <div class="brand" aria-hidden="true"><span>💝</span></div>
+      <div>
+        <h1>Boyfriend Checklist — Heart‑Melting Edition ✨</h1>
+        <div class="tag">Cuteness overload • falling hearts • scroll magic • detailed report • iPhone‑safe 💗</div>
+        <div class="legend" aria-label="Legend">
+          <span class="pill ok">✅ Highest</span>
+          <span class="pill nr">🙂 Normal</span>
+          <span class="pill bl">😕 Below</span>
+          <span class="pill bd">❌ Not at all</span>
+          <span class="badge">Auto‑save • Share • Print</span>
+        </div>
+      </div>
+    </div>
+  </header>  <main class="container" id="top" role="main">
+    <div class="grid" id="cards" aria-live="polite"></div><section class="summary" id="summary" aria-label="Detailed Report">
+  <h2 style="margin:0 0 6px">Detailed Report 💌</h2>
+  <div class="meterWrap"><strong>Completion</strong><div class="meter"><i id="meter"></i></div><span id="progTxt">0/0</span></div>
+  <div class="stat" id="counts"></div>
+  <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start; margin-top:8px">
+    <div class="chart" id="chart" aria-label="Score Radar Chart"></div>
+    <div>
+      <div class="grade" id="grade">—</div>
+      <div id="verdict" style="max-width:420px; color:#6c5f6c"></div>
+      <ul id="tips" style="margin-top:8px"></ul>
+    </div>
+  </div>
+  <h3 style="margin:14px 0 6px">Shareable text</h3>
+  <textarea id="exportText" rows="8" aria-label="Results text"></textarea>
+  <div style="font-size:12px; color:#8b7b81; margin-top:6px">Pro tip: Print to PDF for a cute certificate. 🌸</div>
+</section>
+
+  </main>  <div class="toolbar" role="region" aria-label="Actions">
+    <div class="bar">
+      <button class="btn" id="showBtn" type="button">Show Report 📋</button>
+      <button class="btn ghost" id="copyBtn" type="button">Copy 📄</button>
+      <button class="btn ghost" id="shareBtn" type="button">Share 📤</button>
+      <button class="btn ghost" id="printBtn" type="button">Print 🖨️</button>
+      <button class="btn ghost" id="resetBtn" type="button">Reset ♻️</button>
+      <label class="toggle"><input type="checkbox" id="rainToggle"> Heart rain 🌧️💖</label>
+    </div>
+  </div><a class="jump" href="#top" title="Back to top">⬆️</a>
+
+  <div class="floaty" aria-hidden="true" id="floaty"></div>  <script>
+  (function(){
+    // ============================
+    // Data + iPhone-safe features
+    // ============================
+    var items = [
+      "Must be loyal — never cheat or flirt with others",
+      "Should not be toxic at all",
+      "Must be caring and kind beyond limits",
+      "Gives time, care, and respect consistently",
+      "Should be my friend too, not just boyfriend",
+      "Never acts like a father (‘Aba na bny mera’)",
+      "Does not order or control me (‘mujh pe hukm na chlay’)",
+      "Should never even think of dominating me",
+      "Feels like a drama boy level caring person (romantic, thoughtful)",
+      "Must match high emotional and moral standards",
+      "Clean record — not a ‘dil phaink’ type",
+      "Should truly love, not just be attracted",
+      "Puts in equal or more effort in relationship",
+      "He compromises, not me",
+      "Helps with house chores if needed",
+      "If I can take care of his parents, he should do the same for mine",
+      "If I can earn money, he should respect that",
+      "If I can’t iron clothes, he learns or helps",
+      "If he can’t afford a maid, he still helps me",
+      "Love should feel real and rare, not forced",
+      "Understands that I won’t chase — he should find me",
+      "If you chase someone, they start ignoring — he must value effort"
+    ];
+    var STORAGE_KEY='bf-checklist-v3';
+    var weights={ok:3,nr:2,bl:1,bd:0};
+
+    var cards=document.getElementById('cards');
+    var summary=document.getElementById('summary');
+    var counts=document.getElementById('counts');
+    var exportText=document.getElementById('exportText');
+    var showBtn=document.getElementById('showBtn');
+    var copyBtn=document.getElementById('copyBtn');
+    var shareBtn=document.getElementById('shareBtn');
+    var printBtn=document.getElementById('printBtn');
+    var resetBtn=document.getElementById('resetBtn');
+    var rainToggle=document.getElementById('rainToggle');
+    var floaty=document.getElementById('floaty');
+    var ribbonBar=document.getElementById('ribbonBar');
+    var meter=document.getElementById('meter');
+    var progTxt=document.getElementById('progTxt');
+    var chartBox=document.getElementById('chart');
+    var gradeEl=document.getElementById('grade');
+    var verdict=document.getElementById('verdict');
+    var tips=document.getElementById('tips');
+
+    // Build cards with per-item notes (using template literals to avoid string/escape issues)
+    items.forEach(function(text, idx){
+      var card=document.createElement('article');
+      card.className='card revealable';
+      var id='q'+(idx+1);
+      card.innerHTML = `
+        <div class="title"><span class="num">#${idx+1}</span><span>${text} <span aria-hidden="true">💕</span></span></div>
+        <div class="options" role="radiogroup" aria-label="Options for item ${idx+1}">
+          <label class="opt ok"><input type="radio" name="${id}" value="ok"><i>✅</i><span class="label">Highest</span></label>
+          <label class="opt nr"><input type="radio" name="${id}" value="nr"><i>🙂</i><span class="label">Normal</span></label>
+          <label class="opt bl"><input type="radio" name="${id}" value="bl"><i>😕</i><span class="label">Below</span></label>
+          <label class="opt bd"><input type="radio" name="${id}" value="bd"><i>❌</i><span class="label">Not at all</span></label>
+        </div>
+        <div class="note" contenteditable="true" aria-label="Add a tiny note">📝 Little note (optional): click here to add a thought.</div>`;
+      cards.appendChild(card);
+    });
+
+    // Reveal on scroll (fallback)
+    var supportsIO='IntersectionObserver' in window;
+    function revealAll(){
+      var els=document.querySelectorAll('.revealable');
+      for(var i=0;i<els.length;i++){ els[i].classList.add('revealed'); }
+    }
+    if(supportsIO){
+      var io=new IntersectionObserver(function(entries){
+        for(var i=0;i<entries.length;i++){ var e=entries[i]; if(e.isIntersecting){ e.target.classList.add('revealed'); io.unobserve(e.target);} }
+      },{threshold:.12});
+      var rev=document.querySelectorAll('.revealable');
+      for(var j=0;j<rev.length;j++){ io.observe(rev[j]); }
+    } else { revealAll(); }
+
+    function groups(){ return items.map(function(_,i){ return [].slice.call(document.querySelectorAll('input[name=q'+(i+1)+']')); }); }
+    function read(){ var gs=groups(); return gs.map(function(g){ var v=null; for(var i=0;i<g.length;i++){ if(g[i].checked){ v=g[i].value; break; } } return v; }); }
+
+    function save(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(read())); }catch(e){} }
+    function restore(){ try{ var raw=localStorage.getItem(STORAGE_KEY); if(!raw) return; var arr=JSON.parse(raw); for(var i=0;i<arr.length;i++){ var v=arr[i]; if(!v) continue; var el=document.querySelector('input[name=q'+(i+1)+'][value="'+v+'"]'); if(el) el.checked=true; } }catch(e){} }
+
+    function progress(){
+      var picks=read();
+      var done=0; for(var i=0;i<picks.length;i++){ if(picks[i]) done++; }
+      var pct=Math.round((done/items.length)*100);
+      ribbonBar.style.width=pct+'%';
+      meter.style.width=pct+'%';
+      progTxt.textContent=done+'/'+items.length;
+      return {done:done,pct:pct};
+    }
+
+    function summarize(){
+      var tally={ok:0,nr:0,bl:0,bd:0};
+      var notes=document.querySelectorAll('.note');
+      var score=0; var out=[];
+      for(var i=0;i<items.length;i++){
+        var pick=document.querySelector('input[name=q'+(i+1)+']:checked');
+        var v=pick?pick.value:'—';
+        if(tally.hasOwnProperty(v)){ tally[v]++; score+=weights[v]; }
+        var sym=v==='ok'?'✅': v==='nr'?'🙂': v==='bl'?'😕': v==='bd'?'❌':'⬜';
+        var noteText=(notes[i] && notes[i].textContent.replace(/\n+/g,' ').trim())||'';
+        out.push('#'+(i+1)+' '+sym+' '+items[i]+(noteText?(' — Note: '+noteText):''));
+      }
+      // chips
+      counts.innerHTML = `
+        <span class="chip"><span class="ok">✅</span> Highest: <b>${tally.ok}</b></span>
+        <span class="chip"><span class="nr">🙂</span> Normal: <b>${tally.nr}</b></span>
+        <span class="chip"><span class="bl">😕</span> Below: <b>${tally.bl}</b></span>
+        <span class="chip"><span class="bd">❌</span> Not at all: <b>${tally.bd}</b></span>
+        <span class="chip">Total Score: <b>${score}</b> / <b>${items.length*weights.ok}</b></span>`;
+
+      // grade & verdict
+      var pctScore=Math.round((score/(items.length*3))*100);
+      var letter=pctScore>=90?'S‑Tier 💖': pctScore>=80?'A 💗': pctScore>=70?'B 💘': pctScore>=60?'C 💞': pctScore>=45?'D 💜':'Needs Work 💔';
+      gradeEl.textContent=letter+' — '+pctScore+'%';
+      verdict.innerHTML = pctScore>=90 ? 'Soulmate vibes. Protect at all costs. 🛡️'
+        : pctScore>=80 ? 'High‑quality boyfriend energy. Sprinkle more romance.'
+        : pctScore>=70 ? 'Good potential. Communicate and grow together.'
+        : pctScore>=60 ? 'Mixed signals. Set clear boundaries & goals.'
+        : pctScore>=45 ? 'Red flags peeking. Decide what you won’t compromise.'
+        : 'Hard pass territory. Your heart deserves better.';
+
+      // suggestions
+      var tlist=[
+        'Pick 2–3 non‑negotiables and make a "love contract" together.',
+        'Schedule a weekly check‑in (30 min) for feelings & plans.',
+        'Trade cute chores: you cook, he does dishes — teamwork 💪',
+        'Create a tiny ritual (good‑morning text, night selfie, 10‑sec hug).',
+        'Say what love looks like to you (examples, not guesses).'
+      ];
+      tips.innerHTML='';
+      for(var k=0;k<tlist.length;k++){ var li=document.createElement('li'); li.textContent=tlist[k]; tips.appendChild(li); }
+
+      // shareable text
+      exportText.value = `Boyfriend Checklist — Heart‑Melting Report\nGrade: ${letter} (${pctScore}%)\nBreakdown: ✅ ${tally.ok}, 🙂 ${tally.nr}, 😕 ${tally.bl}, ❌ ${tally.bd}\n\n${out.join('\n')}`;
+
+      // radar chart
+      drawRadar({ok:tally.ok, nr:tally.nr, bl:tally.bl, bd:tally.bd});
+
+      summary.classList.add('show');
+      summary.scrollIntoView({behavior:'smooth', block:'start'});
+      confetti(24);
+    }
+
+    // SVG Radar (no libs)
+    function drawRadar(data){
+      var total=items.length;
+      var oks=data.ok/total, nrs=data.nr/total, bls=data.bl/total, bds=data.bd/total;
+      var W=260, H=260, CX=130, CY=130, R=100;
+      function pt(angle, r){ return [CX + Math.cos(angle)*r, CY + Math.sin(angle)*r]; }
+      var a0=-Math.PI/2, step=(Math.PI*2)/4;
+      var p1=pt(a0, R*oks), p2=pt(a0+step, R*nrs), p3=pt(a0+step*2, R*bls), p4=pt(a0+step*3, R*bds);
+      var grid='';
+      for(var i=1;i<=4;i++){ var rr=R*(i/4); grid+='<circle cx="'+CX+'" cy="'+CY+'" r="'+rr+'" fill="none" stroke="#f7ddef" />'; }
+      var axes='';
+      for(var j=0;j<4;j++){ var p=pt(a0+step*j, R); axes+='<line x1="'+CX+'" y1="'+CY+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="#f3cfea" />'; }
+      var poly='M'+p1[0]+','+p1[1]+' L'+p2[0]+','+p2[1]+' L'+p3[0]+','+p3[1]+' L'+p4[0]+','+p4[1]+' Z';
+      var svg=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" aria-hidden="true">${grid}${axes}<path d="${poly}" fill="url(#g)" stroke="#e59af0" stroke-width="2" /><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff79b0" stop-opacity=".65" /><stop offset="100%" stop-color="#8b5cf6" stop-opacity=".65" /></linearGradient></defs><g font-size="12" fill="#8b7b81"><text x="${CX}" y="${CY-(R+8)}" text-anchor="middle">✅ Highest</text><text x="${CX+(R+8)}" y="${CY}" dominant-baseline="middle">🙂 Normal</text><text x="${CX}" y="${CY+(R+18)}" text-anchor="middle">😕 Below</text><text x="${CX-(R+8)}" y="${CY}" text-anchor="end" dominant-baseline="middle">❌ Not at all</text></g></svg>`;
+      chartBox.innerHTML=svg;
+    }
+
+    // Hearts rain + parallax sweets
+    var raining=false, rainTimer=null;
+    function heart(){
+      var h=document.createElement('div'); h.className='heart'; h.textContent=['💖','💗','💞','💘','💝'][Math.floor(Math.random()*5)];
+      h.style.left=(Math.random()*100)+'vw'; h.style.bottom='-12vh';
+      var size=16+Math.random()*18; h.style.fontSize=size+'px';
+      h.style.transform='translateY(0) rotate('+(Math.random()*30-15)+'deg)';
+      floaty.appendChild(h);
+      setTimeout(function(){ if(h.parentNode) h.parentNode.removeChild(h); }, 8200);
+    }
+    function confetti(n){ for(var i=0;i<(n||18);i++){ setTimeout(heart, i*60); } }
+    function toggleRain(on){
+      raining=!!on; if(rainTimer){ clearInterval(rainTimer); rainTimer=null; }
+      if(raining){ rainTimer=setInterval(heart, 220); }
+    }
+    rainToggle.addEventListener('change', function(){ toggleRain(this.checked); });
+
+    // Parallax candy emojis
+    var par=document.getElementById('parallax');
+    var sweets=['🍓','🍭','🍬','🧁','🍰','🍩'];
+    for(var s=0;s<14;s++){ var sp=document.createElement('div'); sp.className='sweet'; sp.textContent=sweets[Math.floor(Math.random()*sweets.length)]; sp.style.left=(Math.random()*100)+'vw'; sp.style.top=(Math.random()*100)+'vh'; par.appendChild(sp); }
+    window.addEventListener('scroll', function(){
+      var y=window.scrollY||window.pageYOffset||0; var kids=par.children; for(var i=0;i<kids.length;i++){ var d=(i%4)+2; kids[i].style.transform='translateY('+(y/d*0.05)+'px)'; }
+    }, {passive:true});
+
+    // Toolbar actions
+    function copyText(){ exportText.select(); try{ document.execCommand('copy'); }catch(e){ if(navigator.clipboard){ navigator.clipboard.writeText(exportText.value); } } }
+    function share(){ var text=exportText.value||'Boyfriend Checklist — open the page to view my results!'; if(navigator.share){ navigator.share({text:text}).catch(function(){});} else { alert('Share not supported on this browser. Copy instead!'); } }
+    function printPage(){ window.print(); }
+    function resetAll(){ var checked=document.querySelectorAll('input[type=radio]:checked'); for(var i=0;i<checked.length;i++){ checked[i].checked=false; } localStorage.removeItem(STORAGE_KEY); progress(); summary.classList.remove('show'); }
+
+    document.addEventListener('change', function(e){ if(e.target && e.target.matches('input[type=radio]')){ save(); progress(); } });
+    showBtn.addEventListener('click', summarize);
+    copyBtn.addEventListener('click', function(){ copyText(); confetti(20); });
+    shareBtn.addEventListener('click', share);
+    printBtn.addEventListener('click', printPage);
+    resetBtn.addEventListener('click', function(){ if(confirm('Clear all answers?')) resetAll(); });
+
+    // =====================
+    // Minimal self‑tests 🎯
+    // (Run on load; results in console)
+    // =====================
+    function assert(name, cond){ if(!cond){ console.error('❌ Test failed:', name); } else { console.log('✅', name); } }
+    function setPick(qIndex, value){ var el=document.querySelector('input[name=q'+(qIndex+1)+'][value="'+value+'"]'); if(el){ el.checked=true; } }
+
+    // TEST 1: empty state -> 0/len progress
+    (function(){
+      resetAll();
+      var p=progress();
+      assert('Empty progress is 0', p.done===0);
+    })();
+
+    // TEST 2: selecting first 3 as ok updates score & progress
+    (function(){
+      resetAll();
+      setPick(0,'ok'); setPick(1,'ok'); setPick(2,'ok');
+      var p=progress();
+      assert('Progress after 3 picks', p.done===3);
+      summarize();
+      var txt=document.getElementById('exportText').value;
+      assert('Report contains #1 line', /#1/.test(txt));
+    })();
+
+    // init (restore last state AFTER tests so tests don't override user data)
+    restore();
+    progress();
+  })();
+  </script></body>
+</html>
